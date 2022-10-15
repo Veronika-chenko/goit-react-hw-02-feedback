@@ -29,7 +29,7 @@ export class App extends Component {
         const { good, neutral, bad } = this.state;
         const total = good + neutral + bad;
         const positive = Math.round(good * 100 / total);
-        return positive; //first = NaN (hide this)
+        return positive;
     }
     
     render() {
@@ -48,11 +48,8 @@ export class App extends Component {
                         ? <Notification message="There is no feedback" />
                         : <Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={positive} />
                     }
-                    
                 </Section>
             </>
         )
     }
 };
-/* <section style={{marginBottom: "20px"}}>
-    <p style={{ fontWeight: 700, marginBottom: "10px" }}></p> */
