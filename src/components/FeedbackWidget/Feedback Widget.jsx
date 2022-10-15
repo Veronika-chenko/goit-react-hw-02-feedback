@@ -16,10 +16,17 @@ export class FeedbackWidget extends Component {
             [btnName]: prevState[btnName] + 1
         }))
     }
+
+    countTotalFeedback() {
+        const { good, neutral, bad } = this.state;
+        const total = good + neutral + bad;
+        return total;
+    }
     
     render() {
         const { good, neutral, bad } = this.state;
         const objKeys = Object.keys(this.state);
+        const total = this.countTotalFeedback();
 
         return (
             <>
@@ -37,6 +44,7 @@ export class FeedbackWidget extends Component {
                         <li>Good:{good}</li>
                         <li>Neutral:{neutral}</li>
                         <li>Bad:{bad}</li>
+                        <li>Total:{total}</li>
                     </ul>
                 </section>
             </>
