@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { ButtonWrap, Button } from './FeedbackOptions.styled';
 
-export const FeedbackOptions = ({ options, handleClick }) => {
+export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
     return (
         <ButtonWrap>
             {options.map((option) => (
@@ -9,7 +9,7 @@ export const FeedbackOptions = ({ options, handleClick }) => {
                     key={option}
                     type="button"
                     name={option}
-                    onClick={handleClick}>{option}
+                    onClick={onLeaveFeedback}>{option}
                 </Button>
             )
             )}
@@ -19,5 +19,5 @@ export const FeedbackOptions = ({ options, handleClick }) => {
 
 FeedbackOptions.prototype = {
     options: PropTypes.array.isRequired,
-    handleClick: PropTypes.func.isRequired,
+    onLeaveFeedback: PropTypes.func.isRequired,
 };

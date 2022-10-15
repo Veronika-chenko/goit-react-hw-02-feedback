@@ -41,7 +41,7 @@ export class App extends Component {
         return (
             <>
                 <Section title="Please leave feedback">
-                    <FeedbackOptions options={objKeys} handleClick={this.handleClick} />
+                    <FeedbackOptions options={objKeys} onLeaveFeedback={this.handleClick} />
                 </Section>
                 <Section title="Statistics">
                     {total === 0
