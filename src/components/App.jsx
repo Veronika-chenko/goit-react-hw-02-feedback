@@ -1,9 +1,54 @@
-import {FeedbackWidget} from './FeedbackWidget/Feedback Widget'
+// import { object } from "prop-types";
+import { Component } from "react";
+import { FeedbackOptions } from "./FeedbackOptions/FeedbackOptions";
+import { Section } from "./Section/Section";
+import { Statistics } from "./Statistics/Statistics";
 
-export const App = () => {
-  return (
-    <div>
-      <FeedbackWidget />
-    </div>
-  );
+
+export class App extends Component {
+    state = {
+        good: 0,
+        neutral: 0,
+        bad: 0,
+    };
+
+    handleClick = (evt) => {
+        const name = evt.target.name;
+        this.setState((prevState) => ({
+            [name]: prevState[name] + 1
+        }));
+    }
+
+    countTotalFeedback() {
+        const { good, neutral, bad } = this.state;
+        const total = good + neutral + bad;
+        return total;
+    }
+
+    countPositiveFeedbackPercentage() {
+        const { good, neutral, bad } = this.state;
+        const total = good + neutral + bad;
+        const positive = Math.round(good * 100 / total);
+        return positive; //first = NaN (hide this)
+    }
+    
+    render() {
+        const { good, neutral, bad } = this.state;
+        const objKeys = Object.keys(this.state);
+        const total = this.countTotalFeedback();
+        const positive = this.countPositiveFeedbackPercentage();
+
+        return (
+            <>
+                <Section title="Please leave feedback">
+                    <FeedbackOptions options={objKeys} handleClick={this.handleClick} />
+                </Section>
+                <Section title="Statistics">
+                    <Statistics good={good} neutral={neutral} bad={bad} total={total} positivePercentage={positive}/>
+                </Section>
+            </>
+        )
+    }
 };
+/* <section style={{marginBottom: "20px"}}>
+    <p style={{ fontWeight: 700, marginBottom: "10px" }}></p> */
